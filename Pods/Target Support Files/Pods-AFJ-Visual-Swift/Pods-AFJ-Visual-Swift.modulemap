@@ -1,6 +1,0 @@
-framework module Pods_AFJ_Visual_Swift {
-  umbrella header "Pods-AFJ-Visual-Swift-umbrella.h"
-
-  export *
-  module * { export * }
-}
