@@ -54,7 +54,8 @@ platform :ios do
       key_id: asc_key_id,
       issuer_id: asc_issuer_id,
       key_content: asc_key_content,
-      is_key_content_base64: true
+      is_key_content_base64: true,
+      in_house: false
     )
 
     increment_build_number(xcodeproj: "AFJ-Visual-Swift.xcodeproj")
