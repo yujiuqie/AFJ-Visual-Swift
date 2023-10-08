@@ -55,6 +55,7 @@ platform :ios do
       issuer_id: asc_issuer_id,
       key_content: asc_key_content,
       is_key_content_base64: true,
+      duration: 1200,
       in_house: false
     )
 
