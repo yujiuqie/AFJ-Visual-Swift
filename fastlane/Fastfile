@@ -45,6 +45,10 @@ platform :ios do
 
     sync_certificates
 
+    time = Time.new.strftime("%Y%m%d")  # 获取时间格式
+    version = get_version_number#获取版本号
+    ipaName = "AFJ_#{version}_#{time}.ipa"        # eg: Debug_1.0_20200921
+
     asc_key_content = ENV['APP_STORE_CONNECT_API_KEY_CONTENT']
     asc_issuer_id = ENV['APP_STORE_CONNECT_ISSUER_ID']
     asc_key_id = ENV['APP_STORE_CONNECT_API_KEY_ID']
