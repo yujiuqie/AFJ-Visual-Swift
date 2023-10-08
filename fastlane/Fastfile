@@ -18,7 +18,7 @@ default_platform(:ios)
 platform :ios do
 
   before_all do
-    cocoapods
+    # cocoapods
   end
 
   desc "Sync certificates"
@@ -45,10 +45,6 @@ platform :ios do
 
     sync_certificates
 
-    time = Time.new.strftime("%Y%m%d")  # 获取时间格式
-    version = get_version_number#获取版本号
-    ipaName = "AFJ_#{version}_#{time}.ipa"        # eg: Debug_1.0_20200921
-
     asc_key_content = ENV['APP_STORE_CONNECT_API_KEY_CONTENT']
     asc_issuer_id = ENV['APP_STORE_CONNECT_ISSUER_ID']
     asc_key_id = ENV['APP_STORE_CONNECT_API_KEY_ID']
@@ -63,24 +59,11 @@ platform :ios do
       in_house: false
     )
 
-     gym(
-      workspace:"AFJ-Visual-Swift.xcworkspace",
-      scheme:"AFJ-Visual-Swift",
-      output_name:"#{ipaName}",
-      clean:true,
-      export_xcargs: "-allowProvisioningUpdates",
-      sdk: "iphoneos16.4",
-      export_method:"development",
-      output_directory:"./build/",
-      include_symbols:true,
-      include_bitcode:false,
+    increment_build_number(xcodeproj: "AFJ-Visual-Swift.xcodeproj")
+    build_app(
+      scheme: "AFJ-Visual-Swift",
       )
 
-    # increment_build_number(xcodeproj: "AFJ-Visual-Swift.xcodeproj")
-    # build_app(
-    #   scheme: "AFJ-Visual-Swift",
-    #   )
-
-    # upload_to_testflight
+    upload_to_testflight
   end
 end
