@@ -25,8 +25,8 @@ platform :ios do
   lane :sync_certificates do
 
   create_keychain(
-    name:"ENV['MATCH_KEYCHAIN_NAME']",
-    password:"ENV['MATCH_KEYCHAIN_PASSWORD']",
+    name:ENV['MATCH_KEYCHAIN_NAME'],
+    password:ENV['MATCH_KEYCHAIN_PASSWORD'],
     default_keychain:true,
     unlock:true,
     timeout:3600,
@@ -36,8 +36,8 @@ platform :ios do
    match(
     type: "adhoc",
     readonly: true,
-    keychain_name:"ENV['MATCH_KEYCHAIN_NAME']",
-    keychain_password:"ENV['MATCH_KEYCHAIN_PASSWORD']"
+    keychain_name:ENV['MATCH_KEYCHAIN_NAME'],
+    keychain_password:ENV['MATCH_KEYCHAIN_PASSWORD']
     )
   end
 
@@ -50,6 +50,12 @@ platform :ios do
     build_app(
       scheme: "AFJ-Visual-Swift",
       export_xcargs: "-allowProvisioningUpdates",
+      export_options: {
+        method: "adhoc",
+        provisioningProfiles: {
+          "com.alfred.AFJ-Visual-Swift" => "match AdHoc com.alfred.AFJ-Visual-Swift",
+        }
+      },
       )
     upload_to_testflight
   end
