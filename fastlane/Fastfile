@@ -49,13 +49,8 @@ platform :ios do
     asc_issuer_id = ENV['APP_STORE_CONNECT_ISSUER_ID']
     asc_key_id = ENV['APP_STORE_CONNECT_API_KEY_ID']
 
-    increment_build_number(xcodeproj: "AFJ-Visual-Swift.xcodeproj")
-    build_app(
-      scheme: "AFJ-Visual-Swift",
-      )
-
     #发布
-    api_key = app_store_connect_api_key(
+    app_store_connect_api_key(
       key_id: asc_key_id,
       issuer_id: asc_issuer_id,
       key_content: asc_key_content,
@@ -63,7 +58,25 @@ platform :ios do
       duration: 1200,
       in_house: false
     )
-    pilot(api_key: api_key)
-    upload_to_testflight
+
+     gym(
+      workspace:"AFJ-Visual-Swift.xcworkspace",
+      scheme:"AFJ-Visual-Swift",
+      output_name:"#{ipaName}",
+      clean:true,
+      export_xcargs: "-allowProvisioningUpdates",
+      sdk: "iphoneos16.4",
+      export_method:"development",
+      output_directory:"./build/",
+      include_symbols:true,
+      include_bitcode:false,
+      )
+
+    # increment_build_number(xcodeproj: "AFJ-Visual-Swift.xcodeproj")
+    # build_app(
+    #   scheme: "AFJ-Visual-Swift",
+    #   )
+
+    # upload_to_testflight
   end
 end
