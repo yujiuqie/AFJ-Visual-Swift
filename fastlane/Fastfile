@@ -64,6 +64,6 @@ platform :ios do
       scheme: "AFJ-Visual-Swift",
       )
 
-    upload_to_testflight
+    # upload_to_testflight
   end
 end
